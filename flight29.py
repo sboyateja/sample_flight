@@ -25,12 +25,11 @@ df['Year'] = df['Year'].astype(int)
 df = df.merge(airport_coords, left_on='Origin Airport Code', right_on='code', how='left')
 df = df.dropna(subset=['latitude', 'longitude'])
 
-# App configuration
+# Sidebar filters
 st.set_page_config(layout="wide", page_title="US Flight Analytics Dashboard")
 st.markdown("<h1 style='text-align: center; color: white;'>US Flight Analytics Dashboard</h1>", unsafe_allow_html=True)
 st.sidebar.header("Filters")
 
-# Sidebar filters
 year_min, year_max = int(df['Year'].min()), int(df['Year'].max())
 selected_years = st.sidebar.slider("Select Year Range", year_min, year_max, (year_min, year_max))
 passenger_type = st.sidebar.radio("Passenger Type", ['Domestic Passengers', 'International Passengers'])
@@ -110,35 +109,15 @@ with col4:
         }
     ), use_container_width=True)
 
-# Dark theme styling
+# Optional: Add dark mode styling
 st.markdown("""
     <style>
-        html, body, [data-testid="stApp"] {
-            background-color: #1e1e1e;
-            color: white;
-        }
-
-        h1, h2, h3, h4 {
-            color: white;
-        }
-
-        [data-testid="stSidebar"] {
-            background-color: #2d2d2d;
-        }
-
-        .stDataFrame {
-            background-color: #2d2d2d;
-            color: white;
-        }
-
-        .css-1r6slb0 {
-            background-color: #2d2d2d !important;
-            color: white !important;
-        }
-
-        .stSelectbox div[data-baseweb="select"] {
-            background-color: #3a3a3a;
-            color: white;
-        }
+    body {
+        background-color: #2d2d2d;
+        color: white;
+    }
+    .css-1aumxhk {
+        background-color: #3d3d3d;
+    }
     </style>
 """, unsafe_allow_html=True)
